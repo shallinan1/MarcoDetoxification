@@ -1,7 +1,9 @@
 # MaRCo Detoxification
 This is the repository for the 2023 ACL Paper ["Detoxification with MaRCo: Controllable Revision with Experts and Anti-Experts"](https://arxiv.org/abs/2212.10543)
 
-<img src="https://pbs.twimg.com/media/FkeZuLBUUAA6abX?format=jpg&name=4096x4096" alt="drawing" width="50%"/>
+<p align="center">
+  <img src="https://pbs.twimg.com/media/FkeZuLBUUAA6abX?format=jpg&name=4096x4096" alt="drawing" width="75%"/>
+</p>
 
 ## Using this Repository
 
