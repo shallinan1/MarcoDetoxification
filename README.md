@@ -1,5 +1,5 @@
 # MaRCo Detoxification
-This is the repository for the 2023 ACL Paper ["Detoxification with MaRCo: Controllable Revision with Experts and Anti-Experts"](https://arxiv.org/abs/2212.10543)
+This is the repository for the 2023 ACL Paper ["Detoxifying Text with MaRCo: Controllable Revision with Experts and Anti-Experts"](https://arxiv.org/abs/2212.10543)
 
 <p align="center">
   <img src="https://pbs.twimg.com/media/FkeZuLBUUAA6abX?format=jpg&name=4096x4096" alt="drawing" width="75%"/>
@@ -22,21 +22,28 @@ The expert and anti-expert models are available on huggingface here:
 * [Expert](https://huggingface.co/hallisky/bart-base-nontoxic-expert): BART-base further finetuned on the ***non-toxic*** portion of the Jigsaw Corpus with the same pretraining masked denoising objective
 * [Anti-Expert](https://huggingface.co/hallisky/bart-base-toxic-antiexpert): BART-base further finetuned on the ***toxic*** portion of the Jigsaw Corpus with the same pretraining masked denoising objective
 
-Given that the anti-expert is toxic and can be used for nefarious purposed by itself, access requests are currently enabled for this model. Requests will be automatically approved, but we have the right to revoke access if you misuse the model (spreading hate online, etc.).
-
-If you want to train your own expert/anti-expert models on BART with custom hyperparemeter/dataset, please see the `training` folder of this repository.
-
+If you want to train your own expert/anti-expert models on BART with custom hyperparameter/dataset, please see the `training` folder of this repository.
 
 ## Citing this Work
 If you use/reference this work, please cite us with:
 
-    @article{Hallinan2022DetoxifyingTW,
-      title={Detoxifying Text with MaRCo: Controllable Revision with Experts and Anti-Experts},
-      author={Skyler Hallinan and Alisa Liu and Yejin Choi and Maarten Sap},
-      journal={ArXiv},
-      year={2022},
-      volume={abs/2212.10543}
+    @inproceedings{hallinan-etal-2023-detoxifying,
+        title = "Detoxifying Text with {M}a{RC}o: Controllable Revision with Experts and Anti-Experts",
+        author = "Hallinan, Skyler  and
+          Liu, Alisa  and
+          Choi, Yejin  and
+          Sap, Maarten",
+        booktitle = "Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers)",
+        month = jul,
+        year = "2023",
+        address = "Toronto, Canada",
+        publisher = "Association for Computational Linguistics",
+        url = "https://aclanthology.org/2023.acl-short.21",
+        doi = "10.18653/v1/2023.acl-short.21",
+        pages = "228--242",
+        abstract = "Text detoxification has the potential to mitigate the harms of toxicity by rephrasing text to remove offensive meaning, but subtle toxicity remains challenging to tackle. We introduce MaRCo, a detoxification algorithm that combines controllable generation and text rewriting methods using a Product of Experts with autoencoder language models (LMs). MaRCo uses likelihoods under a non-toxic LM (expert) and a toxic LM (anti-expert) to find candidate words to mask and potentially replace. We evaluate our method on several subtle toxicity and microaggressions datasets, and show that it not only outperforms baselines on automatic metrics, but MaRCo{'}s rewrites are preferred 2.1 times more in human evaluation. Its applicability to instances of subtle toxicity is especially promising, demonstrating a path forward for addressing increasingly elusive online hate.",
     }
+
 
 ## Contact
 
