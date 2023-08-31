@@ -13,7 +13,7 @@ import argparse
 import random
 from IPython import embed
 from utils import *
-from infilling import text_infill
+from training.infilling import text_infill
 
 def main(args):
     device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
