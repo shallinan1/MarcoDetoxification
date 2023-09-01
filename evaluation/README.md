@@ -15,4 +15,6 @@ Run the file `evaluate_all.py` with the following command, to get toxicity, BLEU
 
     python3 -m evaluation.evaluate_all --orig_path your_original_text_path --gen_path your_rewrites_path
 
+`your_original_text_path` should be a `.txt` file where each line contains the original prompt. `your_rewrites_path` should be the same type of file, where each line in `your_rewrites_path` corresponds to the rewrite of the original text from `your_original_text_path`.
+
 By default, the metrics will be saved to `your_rewrites_path[:-4] + "_stats.txt"`
