@@ -44,6 +44,7 @@ def js_div(a,b, reduction):
 Main Masker Class
 - Initialized with seed, base model, antiexpert, expert, and tokenizer
 - mask() method will apply MaRCO masking procedure to find where antiexpert/expert disagree and mask these locations
+- Given a list of text in inputs, mask() returns the masked versions of these texts, where bad tokens are replaced with <mask> token (this is BART's mask token)
 """
 class Masker():
     def __init__(
@@ -204,6 +205,9 @@ class Masker():
         return outputs
 
 if __name__ == '__main__':
+    # Below is a simple example using the Masker method and mask class on a couple of examples with a threshold of 1.25
+    # If you want to run just the Masker from the command line, you can modify the below to take in a list of inputs, process them, and feed them into the mask method
+
     parser = argparse.ArgumentParser()
     parser.add_argument("--thresh", type = float, default = 1.5, help = "divergence threshold to identify which tokens to mask")
     parser.add_argument("--topk", type = int, default = 0, help = "Parameter corresponding to method not implemented yet in mask method; choosing top k tokens with highest divergence")
@@ -218,7 +222,6 @@ if __name__ == '__main__':
         )
     args = parser.parse_args()
 
-    # Some examples of using the masker method with a threshold of 1.25
     inputs =  ["I'm surprised you got it done, seeing as you're all girls!", "You are a human"]
     inputs_masked = ["<mask> surprised you got it done, seeing as you're all<mask>!", "You are a<mask>"]
     
