@@ -56,7 +56,7 @@ Then, using this `infiller` class, call the `generate()` method, which takes a l
 Feel free to change your generation parameters to support other decoding strategies (nucleus sampling, top-k, etc.)
 
 ## Example Script - Entire Pipeline of Masking and Generating
-We include an example of the entire pipeline of masking and rewriting inputs in `rewrite.py`. Briefly, we have a method `get_data()` that will load one of the evaluation datasets we used in the paper (dynabench, sbf, or microagressions) given a data path, and use these as inputs. Then, the Masker is initialized and masks the inputs. Finally, the Infiller is initialized and the detoxified output is returned; the original inputs and the rewrites are then saved to a text file. 
+We include an example of the entire pipeline of masking and rewriting inputs in `rewrite_example.py`. Briefly, we have a method `get_data()` that will load one of the evaluation datasets we used in the paper (dynabench, sbf, or microagressions) given a data path, and use these as inputs. Then, the Masker is initialized and masks the inputs. Finally, the Infiller is initialized and the detoxified output is returned; the original inputs and the rewrites are then saved to a text file. 
 
 The example script has logic to name files to save them, such as the masked inputs, and the detoxified texts; feel free to replace this with your own naming schema. In addition, the script has an argument `gen_many` that we recommend you only to use in a special case: if you want to try detoxifiyng the same text with many different generation hyperparameters. In the script, this parameter is set-up so that multiple sets of hyperparameters can be iterated through to make multiple potential rewrites.
 
