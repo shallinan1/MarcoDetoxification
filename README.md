@@ -22,7 +22,27 @@ The expert and anti-expert models are available on huggingface here:
 * [Expert](https://huggingface.co/hallisky/bart-base-nontoxic-expert): BART-base further finetuned on the ***non-toxic*** portion of the Jigsaw Corpus with the same pretraining masked denoising objective
 * [Anti-Expert](https://huggingface.co/hallisky/bart-base-toxic-antiexpert): BART-base further finetuned on the ***toxic*** portion of the Jigsaw Corpus with the same pretraining masked denoising objective
 
+You can download then load them or use these directly from the huggingface transfomers library, ie, 
+
+    # Load model directly
+    from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+
+    tokenizer = AutoTokenizer.from_pretrained("hallisky/bart-base-nontoxic-expert")
+    model = AutoModelForSeq2SeqLM.from_pretrained("hallisky/bart-base-nontoxic-expert")
+
 If you want to train your own expert/anti-expert models on BART with custom hyperparameter/dataset, please see the `training` folder of this repository.
+
+### <ins>Detoxification with MaRCo</ins>
+
+See `rewrite/README.md` for details on how to run the detoxification pipeline,
+
+### <ins>Datasets</ins>
+
+See `datasets/README.md` for access to the datasets and a description. 
+
+### <ins>Evaluation</ins>
+
+See `evaluation/README.md` for the evaluation pipeline on detoxifications. 
 
 ## Citing this Work
 If you use/reference this work, please cite us with:
