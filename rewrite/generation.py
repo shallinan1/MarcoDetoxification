@@ -23,7 +23,6 @@ from tqdm import tqdm
 Infiller module
 - Initialize with a base model, antiexpert (optional), expert (optional)
 - If expert_type == "none", don't use an expert. Same for antiexpert
-- 
 """
 class Infiller():
     def __init__(

@@ -76,6 +76,10 @@ class Masker():
         self.antiexpert.eval()
         self.expert.eval()
     
+    """
+    Takes in a list of text inputs, and a divergence threshold (thresh)
+    Returns a list of the same text inputs, where some of the tokens are now replaced with <mask>
+    """
     def mask(self,
         inputs,
         thresh = 1.5, # Divergence threshold to find which tokens to mask
