@@ -4,7 +4,7 @@ from typing import Union, List
 import os
 from transformers import BartForConditionalGeneration, BartTokenizer
 from IPython import embed
-from infilling import *
+from training.infilling import *
 from utils import preprocess, detokenize, seed_everything
 import nltk.tokenize.casual
 import torch
@@ -209,16 +209,12 @@ class Masker():
         return outputs
 
 if __name__ == '__main__':
-    # Below is a simple example using the Masker method and mask class on a couple of examples with a threshold of 1.25
+    # Below is a simple example using the Masker method and mask class on a couple of examples with a threshold of 1.5
     # If you want to run just the Masker from the command line, you can modify the below to take in a list of inputs, process them, and feed them into the mask method
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--thresh", type = float, default = 1.5, help = "Divergence threshold to identify which tokens to mask")
-
-    # The following are too experimental parameters
-    parser.add_argument("--topk", type = int, default = 0, help = "Parameter corresponding to method not implemented yet in mask method; choosing top k tokens with highest divergence")
-    parser.add_argument("--div_ba_thresh", type = float, default = 0.0, help = "Divergence parameter if you want to use the base model in your divergence (NOT recommended)")
-
+    
     masker = Masker(
         seed = 0, 
         base_path = "facebook/bart-base", 
@@ -229,9 +225,9 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     inputs =  ["I'm surprised you got it done, seeing as you're all girls!", "You are a human"]
-    inputs_masked = ["<mask> surprised you got it done, seeing as you're all<mask>!", "You are a<mask>"]
     
-    masker.mask(inputs, thresh=1.25)
+    masked_inputs = masker.mask(inputs, thresh=args.thresh)
+    print(inputs, masked_inputs)
     embed()
 
 
