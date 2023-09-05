@@ -227,7 +227,7 @@ if __name__ == '__main__':
     inputs =  ["I'm surprised you got it done, seeing as you're all girls!", "You are a human"]
     
     masked_inputs = masker.mask(inputs, thresh=args.thresh)
-    print(inputs, masked_inputs)
+    print("inputs:", inputs, "\nmasked inputs:", masked_inputs)
     embed()
 
 
