@@ -21,6 +21,16 @@ We also recommend removing the BOS and EOS tokens afterwards, ie,
 
     decoded_mask_inputs = [d.replace("<s>", "").replace("</s>", "") for d in decoded_masked_inputs]
 
+### <ins>Interactive Mode</ins>
+To play around with masking with your own inputs in an interactive terminal, from the root directory run:
+
+    python3 -m rewrite.masking
+
+You can also specify the threshold as an argument for this command using `--thresh x`. The default example after running the above command should have the inputs and outputs printed to the terminal:
+
+    inputs: ["I'm surprised you got it done, seeing as you're all girls!", 'You are a human'] 
+    masked inputs: ["I'm surprised you got it done, seeing as you're all<mask>!", 'You are a<mask>']
+
 ## Generating
 `generation.py` contains code to infill the masked inputs from the Masking step using a product-of-experts with the BART models. Again, one must instantiate a class, this time being the `Infiller()` class. Please see the code for a description of all the initialization parameters. The specific configuration we recommend is:
     
@@ -55,13 +65,23 @@ Then, using this `infiller` class, call the `generate()` method, which takes a l
 
 Feel free to change your generation parameters to support other decoding strategies (nucleus sampling, top-k, etc.)
 
+### <ins>Interactive Mode</ins>
+To play around with infilling the masked inputs in an interactive terminal, from the root directory run:
+
+    python3 -m rewrite.generation
+
+You can manually specify inputs and masked inputs to see what the infiller outputs. You can also specify different arguments for this command (see the `argparser` at the bottom of `generation.py`). The default example after running the above command without modification should have the following printed to the terminal:
+
+    inputs: ["I'm surprised you got it done, seeing as you're all girls!", 'You are a human'] 
+    masked inputs: ["I'm surprised you got it done, seeing as you're all<mask>!", 'You are a<mask>'] 
+    outputs: ["I'm surprised you got it done, seeing as you're all so busy!", 'You are a human.']
+
 ## Example Script - Entire Pipeline of Masking and Generating
 We include an example of the entire pipeline of masking and rewriting inputs in `rewrite_example.py`. Briefly, we have a method `get_data()` that will load one of the evaluation datasets we used in the paper (dynabench, sbf, or microagressions) given a data path, and use these as inputs. Then, the Masker is initialized and masks the inputs. Finally, the Infiller is initialized and the detoxified output is returned; the original inputs and the rewrites are then saved to a text file. 
 
 The example script has logic to name files to save them, such as the masked inputs, and the detoxified texts; feel free to replace this with your own naming schema. In addition, the script has an argument `gen_many` that we recommend you only to use in a special case: if you want to try detoxifiyng the same text with many different generation hyperparameters. In the script, this parameter is set-up so that multiple sets of hyperparameters can be iterated through to make multiple potential rewrites.
 
-Feel free to modify this file to accomodate your own data and/or other masking/generation strategies. The **argparser** is expansive, has desciprtions, and should cover all the parameters need to do data loading, masking, and then generation.
-
+Feel free to modify this file to accomodate your own data and/or other masking/generation strategies. The **argparser** is expansive, has descriptions, and should cover all the parameters need to do data loading, masking, and then generation.
 
 ## Auxillary Files
 `gen_utils.py` and `generation_logits_process.py` are helper functions for generation.

@@ -5,7 +5,7 @@ import os
 from numpy import ufunc
 from transformers import BartForConditionalGeneration, BartTokenizer
 from IPython import embed
-from infilling import *
+from training.infilling import *
 from utils import *
 import nltk.tokenize.casual
 import torch
@@ -16,7 +16,6 @@ from . import generation_logits_process
 import pandas as pd
 import functools
 import operator
-from .masking import method1
 from tqdm import tqdm
 
 """
@@ -285,11 +284,10 @@ if __name__ == '__main__':
     # Some examples of using the generate method on some masked inputs with alpha_a = 0.5, alpha_e = 2.5, and temperature = 1.25
     # If you want to run just the Infiller and generate method from the command line, you can modify the below to take in a list of masked inputs, process them, and feed them into the generate method
     parser = argparse.ArgumentParser()
-    parser.add_argument("--alpha_a", type = float, default = 0.0)
-    parser.add_argument("--alpha_e", type = float, default = 0.0)
-    parser.add_argument("--temperature", type = float, default = 1.0)
+    parser.add_argument("--alpha_a", type = float, default = 0.5)
+    parser.add_argument("--alpha_e", type = float, default = 2.5)
+    parser.add_argument("--temperature", type = float, default = 1.25)
     parser.add_argument("--alpha_b", type = float, default = 1.0)
-    parser.add_argument("--max_length", type = int, default = 128)
     parser.add_argument("--verbose",action="store_true")
 
     rewriter = Infiller(
@@ -305,13 +303,11 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     inputs =  ["I'm surprised you got it done, seeing as you're all girls!", "You are a human"]
-    inputs_masked = ["<mask> surprised you got it done, seeing as you're all<mask>!", "You are a<mask>"]
+    inputs_masked = ["I'm surprised you got it done, seeing as you're all<mask>!", 'You are a<mask>']
 
-    inputs = ["Person 1: I'm tired\nPerson 2: Nobody fucking cares bro", "Person 1: You are an idiot man\nPerson 2: Nah, you are the bitch", \
-        "Person 1: In our society, there is a lot of wrongdoing, particularly by elites and those who are untouchable\nPerson 2: What the fuck are you talking about?"]
-    inputs_masked = ["Person 1: I'm tired\nPerson 2: Nobody<mask> <mask> bro", "Person 1: You are an idiot man\nPerson 2: Nah, you<mask> the<mask>", \
-        "Person 1: In our society, there is a lot of wrongdoing, particularly by elites and those who are untouchable\nPerson 2: What the<mask> are you<mask> about?"]
-    context = ["I'm tired", "You are an idiot man","In our society, there is a lot of wrongdoing, particularly by elites and those who are untouchable"]
+    outputs, decoded_outputs = rewriter.generate(inputs, inputs_masked, alpha_a = args.alpha_a, \
+                                                  alpha_e = args.alpha_e, temperature = args.temperature, \
+                                                    verbose = args.verbose, alpha_b = args.alpha_b)
     
-    rewriter.generate(inputs, inputs_masked, alpha_a = 0.5, alpha_e = 2.5, temperature = 1.25)
-    #embed()
+    print("inputs:", inputs, "\nmasked inputs:", inputs_masked, "\noutputs:", decoded_outputs)
+    embed()
