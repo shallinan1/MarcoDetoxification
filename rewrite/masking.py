@@ -209,9 +209,11 @@ if __name__ == '__main__':
     # If you want to run just the Masker from the command line, you can modify the below to take in a list of inputs, process them, and feed them into the mask method
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--thresh", type = float, default = 1.5, help = "divergence threshold to identify which tokens to mask")
+    parser.add_argument("--thresh", type = float, default = 1.5, help = "Divergence threshold to identify which tokens to mask")
+
+    # The following are too experimental parameters
     parser.add_argument("--topk", type = int, default = 0, help = "Parameter corresponding to method not implemented yet in mask method; choosing top k tokens with highest divergence")
-    parser.add_argument("--div_ba_thresh", type = float, default = 0.0, help = "Divergence arameter if you want to use the base model in your divergence (NOT recommended)")
+    parser.add_argument("--div_ba_thresh", type = float, default = 0.0, help = "Divergence parameter if you want to use the base model in your divergence (NOT recommended)")
 
     masker = Masker(
         seed = 0, 
