@@ -16,6 +16,12 @@ Then, activate the environment
 
     conda activate rewrite
 
+**Important!**: The environment is setup to run with a CUDA version compatible with RTX6000 GPUs. You may need to update the environment based on your own GPUs.
+
+### <ins>Compute Requirements</ins>
+
+We recommend using a single RTX6000 GPU (this is what we used for our experiments) or another NVIDIA GPU with >24GB VRAM to enable large-scale rewriting (large batch size). Our method can also run on smaller models <24GB VRAM, but you should set the batch size to be lower.
+
 ### <ins>Detoxification with MaRCo</ins>
 
 See `rewrite/README.md` for details on how to run the detoxification pipeline,
