@@ -3,7 +3,7 @@ from torch import Tensor
 from torch.nn import functional as F
 from utils import *
 import nltk.tokenize.casual
-from infilling import *
+from training.infilling import *
 
 def top_k_top_p_filtering(
     logits: Tensor,
