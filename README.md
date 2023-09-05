@@ -16,6 +16,10 @@ Then, activate the environment
 
     conda activate rewrite
 
+### <ins>Detoxification with MaRCo</ins>
+
+See `rewrite/README.md` for details on how to run the detoxification pipeline,
+
 ### <ins>Expert Models</ins>
 
 The expert and anti-expert models are available on huggingface here:
@@ -31,10 +35,6 @@ You can download then load them or use these directly from the huggingface trans
     model = AutoModelForSeq2SeqLM.from_pretrained("hallisky/bart-base-nontoxic-expert")
 
 If you want to train your own expert/anti-expert models on BART with custom hyperparameter/dataset, please see the `training` folder of this repository.
-
-### <ins>Detoxification with MaRCo</ins>
-
-See `rewrite/README.md` for details on how to run the detoxification pipeline,
 
 ### <ins>Datasets</ins>
 
